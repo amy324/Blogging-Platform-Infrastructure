@@ -1,5 +1,4 @@
 provider "docker" {
-  source = "kreuzwerker/docker"
   # Specify Docker API version (optional)
   # api_version = "1.40"
 }
