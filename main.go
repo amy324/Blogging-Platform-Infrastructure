@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	//"blogging-platform/api"
+	"blogging-platform/api"
 	"blogging-platform/config"
 	"blogging-platform/db"
 )
@@ -13,6 +13,7 @@ func main() {
 
 	fmt.Println("API Config:", apiConfig)
 	fmt.Println("DB Config:", dbConfig)
+	fmt.Println("") // Print an empty line to flush the buffer
 
 	// Connect to the database
 	db, err := db.ConnectDB(dbConfig)
@@ -23,4 +24,15 @@ func main() {
 	defer db.Close()
 
 	fmt.Println("Connected to the database")
+	fmt.Println("") // Print an empty line to flush the buffer
+
+	// Setup API routes and handlers
+	router := api.SetupRouter()
+
+	// Start HTTP server
+	fmt.Println("Starting HTTP server on port", apiConfig.Port)
+	err = router.Run(":" + apiConfig.Port)
+	if err != nil {
+		fmt.Println("Error starting HTTP server:", err)
+	}
 }
