@@ -1,7 +1,14 @@
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "3.0.2"
+    }
+  }
+}
+
 provider "docker" {
-  version = ">= 2.0.0"
-  # Specify Docker API version (optional)
-  # api_version = "1.40"
+  host = "unix:///var/run/docker.sock"
 }
 
 resource "docker_network" "app_network" {
