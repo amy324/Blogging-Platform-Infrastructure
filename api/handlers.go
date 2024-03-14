@@ -1,8 +1,9 @@
 package api
 
 import (
-	//"blogging-platform/config"
-	//"blogging-platform/db"
+	
+	"blogging-platform/config"
+	"blogging-platform/db"
 	"blogging-platform/models"
 	"net/http"
 
@@ -23,7 +24,10 @@ func SetupRouter(dbConn *gorm.DB) *gin.Engine {
 	})
 	router.PUT("/posts/:id", func(c *gin.Context) {
 		updatePostHandler(c, dbConn)
-	}) // Use :id to capture the post ID
+	}) 
+    router.DELETE("/posts/:id", func(c *gin.Context) {
+		deletePostHandler(c, dbConn)
+	})
 
 	return router
 }
@@ -94,4 +98,34 @@ func updatePostHandler(c *gin.Context, dbConn *gorm.DB) {
 
 	// Return JSON response with the updated post
 	c.JSON(http.StatusOK, post)
+}
+
+// Handler for deleting a post
+func deletePostHandler(c *gin.Context, dbConn *gorm.DB) {
+	// Get post ID from URL parameters
+	postID := c.Param("id")
+
+	// Connect to the database
+	// No need to defer closing connection as it's done in each handler
+	dbConn, err := db.ConnectDB(config.NewDBConfig())
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to the database"})
+		return
+	}
+
+	// Fetch the post from the database
+	var post models.Post
+	if err := dbConn.Where("id = ?", postID).First(&post).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
+		return
+	}
+
+	// Delete the post from the database
+	if err := dbConn.Delete(&post).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete post"})
+		return
+	}
+
+	// Return JSON response indicating successful deletion
+	c.JSON(http.StatusOK, gin.H{"message": "Post deleted successfully"})
 }
