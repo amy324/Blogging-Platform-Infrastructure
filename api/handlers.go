@@ -23,14 +23,7 @@ func SetupRouter() *gin.Engine {
 	return router
 }
 
-// Handler for getting all posts
-func getPostsHandler(c *gin.Context) {
-	// Logic to fetch all posts from the database
-	// Return JSON response with the posts
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Get all posts handler",
-	})
-}
+
 
 // Handler for creating a new post
 func createPostHandler(c *gin.Context) {
@@ -63,4 +56,25 @@ func createPostHandler(c *gin.Context) {
     // Return JSON response with the created post
     c.JSON(http.StatusCreated, newPost)
 }
+
+func getPostsHandler(c *gin.Context) {
+    // Connect to the database
+    dbConn, err := db.ConnectDB(config.NewDBConfig())
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to the database"})
+        return
+    }
+    defer dbConn.Close()
+
+    // Fetch all posts from the database
+    var posts []models.Post
+    if err := dbConn.Find(&posts).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch posts"})
+        return
+    }
+
+    // Return JSON response with the fetched posts including IDs
+    c.JSON(http.StatusOK, posts)
+}
+
 
