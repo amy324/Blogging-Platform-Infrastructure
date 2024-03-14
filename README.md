@@ -31,10 +31,10 @@ The blogging platform infrastructure is designed with a focus on reliability, sc
 ## Key Features
 
 - **RESTful API**: The platform provides a RESTful API for CRUD operations on blog posts, adhering to REST principles for resource management and HTTP methods for actions.
-- **Database Connectivity**: Connects to a CockroachDB database backend for persistent storage of blog post data, ensuring data integrity and reliability.
+- **Database Connectivity**: Connects to a Postgres CockroachDB database backend for persistent storage of blog post data, ensuring data integrity and reliability.
 - **Prometheus Metrics**: Exposes application metrics via the `/metrics` endpoint for monitoring performance, availability, and resource utilization.
 - **Terraform Configuration**: Defines infrastructure components and dependencies using Terraform configuration files (`main.tf`), enabling infrastructure as code (IaC) practices for version-controlled, repeatable deployments.
-- **Continuous Integration/Continuous Deployment (CI/CD)**: Integrates with CI/CD pipelines for automated testing, building, and deployment of application changes, facilitating rapid and reliable software delivery.
+
 
 ## Prerequisites
 
