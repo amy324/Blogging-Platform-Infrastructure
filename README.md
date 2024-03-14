@@ -57,22 +57,45 @@ To deploy the blogging platform infrastructure:
     ```bash
     cd Blogging-Platform-Infrastructure
     ```
+3. Create a new file named `.env` in the root directory of the project.
+   
+4. Add the following environment variables to the `.env` file:
 
-3. Modify the Terraform configuration file (`main.tf`) if necessary to customize the infrastructure settings.
+    ```
+    DB_HOST=<database_host>
+    DB_PORT=<database_port>
+    DB_USER=<database_user>
+    DB_PASSWORD=<database_password>
+    DB_NAME=<database_name>
+    DB_SSL_MODE=<ssl_mode>
+    ```
 
-4. Initialize Terraform:
+    Replace `<database_host>`, `<database_port>`, `<database_user>`, `<database_password>`, `<database_name>`, and `<ssl_mode>` with your actual database connection details. Here's an example:
+
+    ```
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USER=myuser
+    DB_PASSWORD=mypassword
+    DB_NAME=mydatabase
+    DB_SSL_MODE=disable
+    ```
+
+5. Modify the Terraform configuration file (`main.tf`) if necessary to customize the infrastructure settings.
+
+6. Initialize Terraform:
 
     ```bash
     terraform init
     ```
 
-5. Review the Terraform execution plan:
+7. Review the Terraform execution plan:
 
     ```bash
     terraform plan
     ```
 
-6. Apply the Terraform configuration to create the infrastructure:
+8. Apply the Terraform configuration to create the infrastructure:
 
     ```bash
     terraform apply
