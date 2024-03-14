@@ -12,8 +12,10 @@ This project implements the infrastructure for a simple blogging platform using 
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Monitoring](#monitoring)
+- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
+
 
 ## Project Overview
 
@@ -132,8 +134,42 @@ The API service provides the following endpoints for managing blog posts:
 
 ## Monitoring
 
-The monitoring setup includes Prometheus for collecting and storing application metrics. Metrics are exposed via the `/metrics` endpoint and can be queried for analysis and visualization.
+The monitoring setup includes Prometheus for collecting and storing application metrics. Prometheus scrapes metrics from the `/metrics` endpoint exposed by the application, providing insights into various aspects of its behavior and performance. Below are some of the key metrics collected by Prometheus:
 
+- **go_gc_duration_seconds**: This metric provides information about the duration of garbage collection cycles in Go. It includes quantiles such as minimum, 25th percentile, median, 75th percentile, and maximum durations, helping to identify potential performance bottlenecks caused by garbage collection.
+
+- **go_goroutines**: Indicates the current number of Goroutines (lightweight threads) that are actively running, offering insights into the concurrency level of the application.
+
+- **go_memstats_alloc_bytes**: Represents the number of bytes allocated and still in use by the Go runtime, reflecting the current memory usage of the application.
+
+- **go_memstats_heap_inuse_bytes**: Shows the number of heap bytes that are actively in use by the Go runtime, providing visibility into the heap memory usage.
+
+- **go_threads**: Reflects the number of operating system threads created by the Go runtime, which can impact the application's parallelism and resource utilization.
+
+- **process_cpu_seconds_total**: Represents the total user and system CPU time spent by the process, indicating the overall CPU usage of the application.
+
+- **process_resident_memory_bytes**: Indicates the size of resident memory (physical memory) used by the process, helping to assess its memory footprint.
+
+- **promhttp_metric_handler_requests_in_flight**: Shows the current number of scrapes (data collection requests) being served by the Prometheus HTTP metric handler, reflecting the workload on the monitoring system.
+
+- **promhttp_metric_handler_requests_total**: Displays the total number of scrapes categorized by HTTP status code, providing insights into the frequency and success rate of data collection requests.
+
+- **requests_total**: Represents the total number of requests received by the application, serving as a fundamental metric for assessing its workload and usage patterns.
+
+These metrics offer insights into various aspects of the application's performance, resource utilization, and runtime behavior, facilitating effective monitoring and troubleshooting.
+
+
+## Testing
+
+If you decide to use this infastructure for your own projects, you can ensure the reliability and functionality of the infrastructure and API endpoints, you can perform the following tests:
+
+- **Infrastructure Testing**: After deploying the infrastructure using Terraform, verify that the Docker containers are running as expected and accessible. You can use tools like `docker ps` to list running containers and `curl` or a web browser to access the API endpoints.
+
+- **API Endpoint Testing**: Use tools like `curl`, Postman, or automated testing frameworks to send requests to the API endpoints (`GET`, `POST`, `PUT`, `DELETE`) and validate the responses. Ensure that the CRUD operations behave as expected and handle error cases gracefully.
+
+- **Integration Testing**: Conduct integration tests to validate the interactions between different components of the infrastructure, such as the API service, database backend, and monitoring system. You can use testing frameworks like Go's built-in testing package or tools like Selenium for web UI testing if you decide to create a front-end.
+
+By conducting thorough testing, you can ensure the reliability, scalability, and security of the blogging platform infrastructure and API services, providing a better user experience and minimizing the risk of issues in production environments.
 
 
 ## Contributing
@@ -142,4 +178,6 @@ Contributions to this project are welcome! If you encounter any issues or have s
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
+
+
