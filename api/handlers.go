@@ -14,6 +14,7 @@ import (
 // SetupRouter sets up the API routes and handlers
 func SetupRouter(dbConn *gorm.DB) *gin.Engine {
 	router := gin.Default()
+	
 
 	// Define API routes
 	router.GET("/posts", func(c *gin.Context) {
