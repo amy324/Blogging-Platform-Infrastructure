@@ -16,18 +16,18 @@ func main() {
 	fmt.Println("") // Print an empty line to flush the buffer
 
 	// Connect to the database
-	db, err := db.ConnectDB(dbConfig)
+	dbConn, err := db.ConnectDB(dbConfig)
 	if err != nil {
 		fmt.Println("Error connecting to the database:", err)
 		return
 	}
-	defer db.Close()
+	defer dbConn.Close()
 
 	fmt.Println("Connected to the database")
 	fmt.Println("") // Print an empty line to flush the buffer
 
 	// Setup API routes and handlers
-	router := api.SetupRouter()
+	router := api.SetupRouter(dbConn) // Pass dbConn to SetupRouter
 
 	// Start HTTP server
 	fmt.Println("Starting HTTP server on port", apiConfig.Port)
