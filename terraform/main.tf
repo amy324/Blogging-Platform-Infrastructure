@@ -17,7 +17,7 @@ resource "docker_network" "app_network" {
 
 resource "docker_container" "myapp_container" {
   name  = "myapp"
-  image = "app:latest"
+  image = "myapp:latest"  # Updated image name
   ports {
     internal = 8080
     external = 8080

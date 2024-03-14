@@ -39,13 +39,8 @@ func main() {
 	// Create a new Gin router
 	router := gin.New()
 
-	// Define a handler for the root path
-	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hello, World!")
-	})
-
 	// Setup API routes and handlers
-	api.SetupRouter(dbConn) // Pass dbConn to SetupRouter
+	api.SetupRouter(router, dbConn) // Pass dbConn to SetupRouter
 
 	// Wrap the promhttp.Handler() with a custom handler function
 	handler := func(c *gin.Context) {
@@ -54,6 +49,11 @@ func main() {
 
 	// Register the custom handler with gin
 	router.GET("/metrics", gin.HandlerFunc(handler))
+
+	// Define a handler for the root path
+	router.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Hello, World!")
+	})
 
 	// Middleware to handle favicon.ico request
 	router.Use(func(c *gin.Context) {

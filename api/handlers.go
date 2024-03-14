@@ -12,25 +12,20 @@ import (
 )
 
 // SetupRouter sets up the API routes and handlers
-func SetupRouter(dbConn *gorm.DB) *gin.Engine {
-	router := gin.Default()
-	
-
-	// Define API routes
-	router.GET("/posts", func(c *gin.Context) {
-		getPostsHandler(c, dbConn)
-	})
-	router.POST("/posts", func(c *gin.Context) {
-		createPostHandler(c, dbConn)
-	})
-	router.PUT("/posts/:id", func(c *gin.Context) {
-		updatePostHandler(c, dbConn)
-	}) 
+func SetupRouter(router *gin.Engine, dbConn *gorm.DB) {
+    // Define API routes
+    router.GET("/posts", func(c *gin.Context) {
+        getPostsHandler(c, dbConn)
+    })
+    router.POST("/posts", func(c *gin.Context) {
+        createPostHandler(c, dbConn)
+    })
+    router.PUT("/posts/:id", func(c *gin.Context) {
+        updatePostHandler(c, dbConn)
+    }) 
     router.DELETE("/posts/:id", func(c *gin.Context) {
-		deletePostHandler(c, dbConn)
-	})
-
-	return router
+        deletePostHandler(c, dbConn)
+    })
 }
 
 // Handler for creating a new post

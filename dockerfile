@@ -9,8 +9,8 @@ RUN go mod download && go mod verify
 # Copy the entire project directory into the Docker image context
 COPY . .
 
-# Build the executable binary and place it in the /usr/local/bin/ directory
-RUN go build -v -o /usr/local/bin/app .
+# Build the executable binary and place it in the /app directory
+RUN go build -v -o app .
 
-# Print the contents of /usr/local/bin and current working directory when the container starts
-CMD ["sh", "-c", "ls -l /usr/local/bin && pwd && ./app"]
+# Print the contents of /app and current working directory when the container starts
+CMD ["/app/app"]
