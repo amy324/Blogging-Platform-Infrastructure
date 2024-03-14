@@ -12,7 +12,6 @@ import (
 // ConnectDB establishes a connection to the CockroachDB database using the provided configuration
 func ConnectDB(config *config.DBConfig) (*gorm.DB, error) {
     connectionString := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s?sslmode=%s", config.User, config.Password, config.Host, config.Port, config.DBName, config.SSLMode)
-    fmt.Println("Database connection string:", connectionString)
 
     db, err := gorm.Open("postgres", connectionString)
     if err != nil {
