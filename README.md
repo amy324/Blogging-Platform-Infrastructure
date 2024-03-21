@@ -44,7 +44,9 @@ Before running the infrastructure setup, ensure you have the following installed
 - **Docker**: For building and running the application containers.
 - **Prometheus**: Required for monitoring the application.
 
-  For best results, I recommend you run this on a UNIX-like environement. For reference, this project was built using a (Linux Ubuntu)[https://ubuntu.com/] environment. Alternatively, you can run on Windows using (Terraform Cloud)[https://www.hashicorp.com/products/terraform?utm_source=google&utm_channel_bucket=paid&utm_medium=sem&utm_campaign=CLOUD_EMEA_UKI_ENG_BOFU_PRACTITIONER_SEM_A_ALL_TERRAFORM_CLD_GG_BRAND_-_Obility&utm_content=terraform%20cloud-144080651246-645564370290&utm_offer=signup&gad_source=1&gclid=CjwKCAjwte-vBhBFEiwAQSv_xXBDmsqlQnMqEhksoTd7_uncrOtBNF7AntDMdJlMJexWBITA5bh34xoCkaEQAvD_BwE] and (Docker Desktop)[https://www.docker.com/products/docker-desktop/], however everything will run much more smoothly as Docker and terraform are designed to work best in UNIX-like environments.
+  For best results, I recommend you run this on a UNIX-like environement. For reference, this project was built using a [Linux Ubuntu](https://ubuntu.com/) environment. Alternatively, you can run on Windows using [Terraform Cloud](https://www.hashicorp.com/products/terraform?utm_source=google&utm_channel_bucket=paid&utm_medium=sem&utm_campaign=CLOUD_EMEA_UKI_ENG_BOFU_PRACTITIONER_SEM_A_ALL_TERRAFORM_CLD_GG_BRAND_-_Obility&utm_content=terraform%20cloud-144080651246-645564370290&utm_offer=signup&gad_source=1&gclid=CjwKCAjwte-vBhBFEiwAQSv_xXBDmsqlQnMqEhksoTd7_uncrOtBNF7AntDMdJlMJexWBITA5bh34xoCkaEQAvD_BwE) and [Docker Desktop](https://www.docker.com/products/docker-desktop/), however everything will run much more smoothly as Docker and terraform are designed to work best in UNIX-like environments.
+
+If you have a PC, I recommend installing [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) which allows you to run programs on a Linux distro of your choice and seemlessly switch between UNIX-like and Windows envrionments without having to dual boot
 
 ## Usage
 
